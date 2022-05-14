@@ -1,3 +1,3 @@
-# system-programming-labs
+# algorithms and computation methods
 
-Doing labs for system programming on Java.
+Doing labs for acm on Java.
