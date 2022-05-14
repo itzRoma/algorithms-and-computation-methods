@@ -46,6 +46,31 @@ public abstract class AbstractInterpolationFunction implements InterpolationFunc
     }
 
     @Override
+    public double error(double xx) {
+        final InterpolationFunction that = InterpolationFunction.newInstance(
+                this.getClass().getName(),
+                mathFunction,
+                limitA, limitB, nodesAmount + 1
+        );
+        return that.interpolate(xx) - interpolate(xx);
+    }
+
+    @Override
+    public double errorOfError(double xx) {
+        final InterpolationFunction that = InterpolationFunction.newInstance(
+                this.getClass().getName(),
+                mathFunction,
+                limitA, limitB, nodesAmount + 1
+        );
+        return that.error(xx);
+    }
+
+    @Override
+    public double errorBlur(double xx) {
+        return errorOfError(xx) - error(xx);
+    }
+
+    @Override
     public double[] getXNodes() {
         return xNodes;
     }

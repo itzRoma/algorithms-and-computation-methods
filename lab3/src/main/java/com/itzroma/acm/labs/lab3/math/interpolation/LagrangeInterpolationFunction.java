@@ -22,20 +22,4 @@ public class LagrangeInterpolationFunction extends AbstractInterpolationFunction
         }
         return result;
     }
-
-    @Override
-    public double error(double xx) {
-        final InterpolationFunction that = new LagrangeInterpolationFunction(mathFunction, limitA, limitB, nodesAmount + 1);
-        return that.interpolate(xx) - interpolate(xx);
-    }
-
-    @Override
-    public double errorOfError(double xx) {
-        return new LagrangeInterpolationFunction(mathFunction, limitA, limitB, nodesAmount + 1).error(xx);
-    }
-
-    @Override
-    public double errorBlur(double xx) {
-        return errorOfError(xx) - error(xx);
-    }
 }
