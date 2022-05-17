@@ -12,18 +12,19 @@ public class HalfDivisionSolutionMethod extends AbstractSolutionMethod {
         double a = limitA;
         double b = limitB;
 
-        while (Math.abs(b - a) > accuracy) {
+        while (true) {
             double c = (b + a) / 2;
+
+            if (Math.abs(b - a) < accuracy)
+                return c;
 
             if (equation.valueAt(c) == 0)
                 return c;
 
-            if (equation.valueAt(a) * equation.valueAt(c) <= 0)
+            if (equation.valueAt(a) * equation.valueAt(c) < 0)
                 b = c;
             else
                 a = c;
         }
-
-        return (b + a) / 2;
     }
 }
