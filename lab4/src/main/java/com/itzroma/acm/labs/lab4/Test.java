@@ -5,57 +5,46 @@ import com.itzroma.acm.labs.lab4.math.solution.*;
 
 public class Test {
     public static void main(String[] args) {
-        MathEquation test = new MathEquation(
-                "sin(x) = 0",
-                Math::sin,
-                Math::cos,
-                x -> -Math.sin(x)
+        MathEquation t14v1 = new MathEquation(
+                "x^3 + 3x^2 - 3 = 0",
+                x -> Math.pow(x, 3) + 3 * Math.pow(x, 2) - 3,
+                null, null
         );
-        MathEquation var1 = new MathEquation(
-                "x^3 - x + 1 = 0",
-                x -> Math.pow(x, 3) - x + 1,
-                x -> 3 * Math.pow(x, 2) - 1,
-                x -> 6 * x
+        MathEquation t14v2 = new MathEquation(
+                "x^3 + 3x^2 - 24x + 1 = 0",
+                x -> Math.pow(x, 3) + 3 * Math.pow(x, 2) - 24 * x + 1,
+                null, null
         );
-        MathEquation var19 = new MathEquation(
-                "x - cos(x)",
+        MathEquation t14v3 = new MathEquation(
+                "x^3 - 6x^2 + 9x - 3 = 0",
+                x -> Math.pow(x, 3) - 6 * Math.pow(x, 2) + 9 * x - 3,
+                null, null
+        );
+        MathEquation t14v4 = new MathEquation(
+                "x^3 - x - 3 = 0",
+                x -> Math.pow(x, 3) - x - 3,
+                null, null
+        );
+        MathEquation t14v5 = new MathEquation(
+                "x - cos(x) = 0",
                 x -> x - Math.cos(x),
-                x -> 1 + Math.sin(x),
-                Math::cos
-        );
-        MathEquation var26 = new MathEquation(
-                "ln(x) + (x + 1)^3 = 0",
-                x -> Math.log(x) + Math.pow((x + 1), 3),
-                x -> 1 / x + 3 * Math.pow(x, 2) + 6 * x + 3,
-                x -> -(1 / Math.pow(x, 2)) + 6 * x + 6
+                null, null
         );
 
-        final double a = -2;
-        final double b = 1;
+        final double a = -10;
+        final double b = 10;
         final double e = 0.001;
 
-        AbstractSolutionMethod halfDivisionTest = new HalfDivisionSolutionMethod(test, a, b, e);
-        AbstractSolutionMethod chordTest = new ChordSolutionMethod(test, a, b, e);
+        AbstractSolutionMethod t14v1a = new HalfDivisionSolutionMethod(t14v1, a, b, e);
+        AbstractSolutionMethod t14v2a = new HalfDivisionSolutionMethod(t14v2, a, b, e);
+        AbstractSolutionMethod t14v3a = new HalfDivisionSolutionMethod(t14v3, a, b, e);
+        AbstractSolutionMethod t14v4a = new HalfDivisionSolutionMethod(t14v4, a, b, e);
+        AbstractSolutionMethod t14v5a = new HalfDivisionSolutionMethod(t14v5, a, b, e);
 
-        AbstractSolutionMethod halfDivision1 = new HalfDivisionSolutionMethod(var1, a, b, e);
-        AbstractSolutionMethod chord1 = new ChordSolutionMethod(var1, a, b, e);
-
-        AbstractSolutionMethod halfDivision19 = new HalfDivisionSolutionMethod(var19, a, b, e);
-        AbstractSolutionMethod chord19 = new ChordSolutionMethod(var19, a, b, e);
-
-        AbstractSolutionMethod halfDivision26 = new HalfDivisionSolutionMethod(var26, a, b, e);
-        AbstractSolutionMethod chord26 = new ChordSolutionMethod(var26, a, b, e);
-
-        halfDivisionTest.showSolution();
-        chordTest.showSolution();
-
-        halfDivision1.showSolution();
-        chord1.showSolution();
-
-        halfDivision19.showSolution();
-        chord19.showSolution();
-
-        halfDivision26.showSolution();
-        chord26.showSolution();
+        t14v1a.showSolution(); // correct
+        t14v2a.showSolution(); // correct
+        t14v3a.showSolution(); // correct
+        t14v4a.showSolution(); // correct
+        t14v5a.showSolution(); // correct
     }
 }
