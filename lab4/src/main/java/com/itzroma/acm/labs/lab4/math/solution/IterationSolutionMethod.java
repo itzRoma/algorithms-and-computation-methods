@@ -7,7 +7,10 @@ public class IterationSolutionMethod extends AbstractSolutionMethod {
 
     public IterationSolutionMethod(MathEquation equation, double limitA, double limitB, double accuracy) {
         super(equation, limitA, limitB, accuracy);
-        intermediateRoot = new HalfDivisionSolutionMethod(equation, limitA, limitB, accuracy).solve();
+        intermediateRoot = new HalfDivisionSolutionMethod(
+                new MathEquation(null, equation.secondDerivative(), null, null),
+                limitA, limitB, accuracy
+        ).solve();
     }
 
     private double findStartX() {
@@ -23,6 +26,9 @@ public class IterationSolutionMethod extends AbstractSolutionMethod {
 
     private double solve(double lambda, double x) {
         double x0;
+
+        check();
+
         do {
             x0 = x;
             x = x - lambda * equation.valueAt(x);

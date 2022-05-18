@@ -21,9 +21,19 @@ public abstract class AbstractSolutionMethod implements SolutionMethod {
         this.accuracy = accuracy;
     }
 
+    protected void check() {
+        if (equation.valueAt(limitA) * equation.valueAt(limitB) > 0)
+            throw new IllegalStateException("Condition 'f(a) * f(b) <= 0' not satisfied!");
+    }
+
     public void showSolution() {
+        System.out.printf("%nEquation: %s%n", equation.stringExpression());
+        System.out.printf("Method: %s%n", this.getClass().getSimpleName());
+
         List<Range> ranges = findRangesWithAnswers(equation);
         System.out.println("Diapasons with answers: " + ranges);
+
+        System.out.printf("Roots in [%f; %f]:%n", limitA, limitB);
 
         boolean answersExist = false;
         for (Range range : ranges) {
@@ -42,7 +52,7 @@ public abstract class AbstractSolutionMethod implements SolutionMethod {
         }
 
         if (!answersExist) {
-            System.out.printf("There are not roots in [%f; %f]", limitA, limitB);
+            System.out.println("There are not roots in given range!");
         }
     }
 }

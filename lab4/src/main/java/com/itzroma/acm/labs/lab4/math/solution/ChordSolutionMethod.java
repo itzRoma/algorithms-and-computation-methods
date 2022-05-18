@@ -9,18 +9,25 @@ public class ChordSolutionMethod extends AbstractSolutionMethod {
 
     @Override
     public double solve() {
-        double x;
+        check();
+
         double a = limitA;
         double b = limitB;
 
-        while (true) {
-            x = a - (equation.valueAt(a) * (b - a)) / (equation.valueAt(b) - equation.valueAt(a));
+        if (!(equation.firstDerivative().apply((b + a) / 2) * equation.secondDerivative().apply((b + a) / 2) > 0)) {
+            final double temp = a;
+            a = b;
+            b = temp;
+        }
 
-            if (Math.abs(x - a) < accuracy) {
-                return x;
-            } else {
-                a = x;
-            }
+        while (true) {
+            double x = a - (equation.valueAt(a) * (b - a)) / (equation.valueAt(b) - equation.valueAt(a));
+
+            if (Double.isNaN(x)) throw new ArithmeticException("Undefined value occurred!");
+
+            if (Math.abs(x - a) < accuracy) return x;
+
+            a = x;
         }
     }
 }

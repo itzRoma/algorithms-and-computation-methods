@@ -9,6 +9,8 @@ public class HalfDivisionSolutionMethod extends AbstractSolutionMethod {
 
     @Override
     public double solve() {
+        check();
+
         double a = limitA;
         double b = limitB;
 

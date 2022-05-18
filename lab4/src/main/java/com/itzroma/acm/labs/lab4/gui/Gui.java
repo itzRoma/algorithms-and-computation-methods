@@ -118,15 +118,23 @@ public class Gui extends JFrame {
             }
 
             final List<Range> ranges = solutionMethod.findRangesWithAnswers(selectedMathEquation);
+            rangesTextField.setText(ranges.toString());
 
             boolean rootsExist = false;
-            final StringBuilder roots = new StringBuilder();
+            StringBuilder roots = new StringBuilder();
             for (Range range : ranges) {
-                double x0 = SolutionMethod.newInstance(
-                        selectedSolutionMethod.getName(),
-                        selectedMathEquation,
-                        range.limitA(), range.limitB(), accuracy
-                ).solve();
+                double x0;
+                try {
+                    x0 = SolutionMethod.newInstance(
+                            selectedSolutionMethod.getName(),
+                            selectedMathEquation,
+                            range.limitA(), range.limitB(), accuracy
+                    ).solve();
+                } catch (Exception ex) {
+                    final String errorMessage = ex.toString();
+                    rootsTextField.setText(errorMessage.substring(errorMessage.indexOf(':') + 2));
+                    return;
+                }
 
                 if (x0 >= limitA && x0 <= limitB) {
                     rootsExist = true;
@@ -139,7 +147,6 @@ public class Gui extends JFrame {
             }
 
             rootsTextField.setText(roots.toString());
-            rangesTextField.setText(ranges.toString());
         });
 
         seriesCollection.addSeries(series);
