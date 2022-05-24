@@ -2,10 +2,7 @@ package com.itzroma.acm.labs.lab3;
 
 import com.itzroma.acm.labs.lab3.gui.Gui;
 import com.itzroma.acm.labs.lab3.math.MathFunction;
-import com.itzroma.acm.labs.lab3.math.interpolation.AbstractInterpolationFunction;
-import com.itzroma.acm.labs.lab3.math.interpolation.InterpolationFunction;
-import com.itzroma.acm.labs.lab3.math.interpolation.LagrangeInterpolationFunction;
-import com.itzroma.acm.labs.lab3.math.interpolation.NewtonInterpolationFunction;
+import com.itzroma.acm.labs.lab3.math.interpolation.*;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -26,8 +23,8 @@ public class Main {
     private static List<Class<? extends AbstractInterpolationFunction>> registerInterpolationFunctions() {
         InterpolationFunction.register(
                 LagrangeInterpolationFunction.class, // lagrange
-                NewtonInterpolationFunction.class // newton
-                // insert your new InterpolationFunction here
+                NewtonInterpolationFunction.class, // newton
+                AitkenInterpolationFunction.class // aitken
         );
         return InterpolationFunction.ALL;
     }
